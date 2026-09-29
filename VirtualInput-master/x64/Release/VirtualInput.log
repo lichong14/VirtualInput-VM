@@ -1,0 +1,33 @@
+﻿  Building 'VirtualInput' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Release\VirtualInput.inf
+  Stamping [Version] section with DriverVer=09/29/2026,17.55.53.590
+F:\n8-VirtualInput\VirtualInput-master\VirtualInput.inf(29-29): warning 2084: Service binary 'C:\Windows\System32\drivers\mshidkmdf.sys' should reference a CopyFiles destination file.
+  Device.c
+  Driver.c
+  QueueDefault.c
+  QueueManual.c
+  Util.c
+  正在生成代码...
+  VirtualInput.vcxproj -> F:\n8-VirtualInput\VirtualInput-master\x64\Release\VirtualInput.sys
+  Done Adding Additional Store
+  Successfully signed: F:\n8-VirtualInput\VirtualInput-master\x64\Release\VirtualInput.sys
+  
+  Driver is 'Universal'.
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  F:\n8-VirtualInput\VirtualInput-master\x64\Release\VirtualInput\virtualinput.cat
+  Set catalog attribute.
+  WdkVersion: 10.0.26100.0
+  Set catalog attribute.
+  WdkAssemblyVersion: 10.0.26100.6584
+  Done Adding Additional Store
+  Successfully signed: F:\n8-VirtualInput\VirtualInput-master\x64\Release\VirtualInput\virtualinput.cat
+  

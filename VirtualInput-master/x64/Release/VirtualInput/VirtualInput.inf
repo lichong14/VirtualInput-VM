@@ -1,0 +1,70 @@
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = HIDClass
+ClassGuid   = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider    = %ManufacturerName%
+CatalogFile = %DriverName%.cat
+DriverVer = 09/29/2026,17.55.53.590
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+VirtualInput.sys = 1,,
+
+;*****************************************
+; 加上 10.0...16299，彻底解决 error 1199
+;*****************************************
+[Manufacturer]
+%ManufacturerName% = Standard,NTamd64.10.0...16299
+
+[Standard.NTamd64.10.0...16299]
+%DeviceDesc% = Current_Install, HID\%DriverName%
+%DeviceDesc% = Current_Install, root\%DriverName%
+
+[Current_Install.NT]
+CopyFiles = File_Copy
+
+[File_Copy]
+VirtualInput.sys
+
+[Current_Install.NT.HW]
+AddReg = Current_Install_AddReg
+
+[Current_Install_AddReg]
+HKR,,"LowerFilters",0x00010008,"vhidmini"
+
+[Current_Install.NT.Services]
+AddService = vhidmini,0,Current_Install_Service_Inst
+AddService = mshidkmdf,0x00000002,mshidkmdf_Service_Inst
+
+[Current_Install_Service_Inst]
+DisplayName    = %ServiceName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\%DriverName%.sys
+
+[mshidkmdf_Service_Inst]
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\mshidkmdf.sys
+
+; ⚡ 修复 error 1084：服务名必须严格匹配上面的 vhidmini
+[Current_Install.NT.Wdf]
+KmdfService = vhidmini, Current_Install_wdfsect
+
+[Current_Install_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+DriverName       = "VirtualInput"
+ManufacturerName = "cn5"
+DiskName         = "Installation Disk"
+DeviceDesc       = "cn5 mouse"
+ServiceName      = "cn5 Service"
